@@ -1,1 +1,2 @@
-# Mnist-Data-Recognizer
+# RISCV CODE FOR PROGRAMMING PRACTICE
+
