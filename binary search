@@ -1,0 +1,40 @@
+////////////////////////////////////////binary search//////////////////////////////////////////////////////
+.data
+arr:    .word   10 20 30 40 45 50 
+n:      .word   0
+k:      .word   45
+.text
+
+Main:
+addi x2 x0 1111
+lw x30 k
+la x19 n
+la x20 arr
+sub x5 x19 x20
+li x4 4
+div x5 x5 x4
+
+addi x6 x0 0    #x6 = (l = 0) 
+addi x7 x5 0    #x7 = (r = n)
+beq x0 x0 bs
+bs:
+    sub x11 x7 x6   #x11 = r-l
+    srli x11 x11 1  #x11 = r-l/2
+    add x11 x11 x6  #x11 = l+(r-l)/2
+    
+    mul x12 x11 x4
+    add x13 x20 x12
+    lw x9 0(x13)
+    beq x30 x9 EXIT
+    blt x30 x9 L1
+    bgt x30 x9 L2
+    
+L1:
+    add x7 x11 x0
+    beq x0 x0 bs
+L2:
+    addi x6 x11 1
+    beq x0 x0 bs
+    
+    
+EXIT: addi x2 x7 0
