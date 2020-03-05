@@ -1,0 +1,26 @@
+//////////////////////  PALLINDROM  //////////////////////////////////////////
+.data
+str: .asciiz "6abcba6"
+n: .byte 3
+.text 
+
+addi x5 x0 11
+la x10 str      # x10 = address of string
+la x6 n
+sub x6 x6 x10   # x6 = size of str + 1(NULL CHAR)
+addi x6 x6 -1   #x6 = n
+addi x7 x0 0    #x7 = i
+loop:
+    add  x9 x10 x7  #x9 = &str[i]
+    lb x19 0(x9)
+    add x11 x0 x6   #x11 = n
+    addi x11 x11 -1 #x11 = n-1
+    sub x11 x11 x7  #x11= (n-1) - i
+    add  x12 x10 x11 #x12 = &arr[n-1-i]
+    lb  x20 0(x12)
+    bne  x19 x20 break
+    bgt x11 x7 EXIT 
+    addi x7 x7 1
+    beq x0 x0 loop
+EXIT:   addi x5 x0 1
+break:
